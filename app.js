@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 require("express-async-errors");
 require("dotenv").config();
-console.log(process.env);
 const authRoute = require("./routes/auth");
 const jobsRoute = require("./routes/jobs");
 const connectDB = require("./db/connectDB");
@@ -17,16 +16,15 @@ app.use("/api/v1/jobs", authMiddleware, jobsRoute);
 app.use(errorHandler);
 
 const url = process.env.MONGO_URI;
-console.log(url);
+let port = 3000 && process.env.PORT;
 const start = async () => {
   try {
     await connectDB(url);
-    app.listen(3000, () => {
+    app.listen(port, () => {
       console.log("is listening on 3000");
-      // res.send("is listening on 3000");
     });
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 };
 start();
