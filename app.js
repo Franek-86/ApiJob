@@ -11,7 +11,7 @@ const { prototype } = require("./errors/unauthorized");
 const yaml = require("js-yaml");
 const fs = require("fs");
 app.get("/", (req, res) => {
-  res.send(doc);
+  res.json(doc);
 });
 app.use(express.json());
 app.use("/api/v1/", authRoute);
