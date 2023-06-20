@@ -1,20 +1,20 @@
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const job = require("../models/job");
-const {
-  NotFound,
-  Unauthorized,
-  CustomError,
-  BadRequest,
-} = require("../errors");
+// const {
+//   NotFound,
+//   Unauthorized,
+//   CustomError,
+//   BadRequest,
+// } = require("../errors");
 
 const createJob = async (req, res, next) => {
   const { company, position, userId } = req.body;
-  // try {
   const singleJob = await job.create({
     company: company,
     position: position,
     createdBy: userId,
   });
+
   if (singleJob) {
     res.status(200).json({ singleJob });
   }

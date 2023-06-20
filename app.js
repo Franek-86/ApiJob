@@ -7,6 +7,7 @@ const jobsRoute = require("./routes/jobs");
 const connectDB = require("./db/connectDB");
 const authMiddleware = require("./middleware/authMiddleware");
 const errorHandler = require("./middleware/errorHandler");
+const { prototype } = require("./errors/unauthorized");
 app.get("/", (req, res) => {
   res.send("ciao");
 });
@@ -16,12 +17,12 @@ app.use("/api/v1/jobs", authMiddleware, jobsRoute);
 app.use(errorHandler);
 
 const url = process.env.MONGO_URI;
-let port = 3000 && process.env.PORT;
+let port = process.env.PORT || 3000;
 const start = async () => {
   try {
     await connectDB(url);
     app.listen(port, () => {
-      console.log("is listening on 3000");
+      console.log(`is listening on port ${port}`);
     });
   } catch (error) {
     console.log(error);
