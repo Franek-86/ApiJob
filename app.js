@@ -8,8 +8,10 @@ const connectDB = require("./db/connectDB");
 const authMiddleware = require("./middleware/authMiddleware");
 const errorHandler = require("./middleware/errorHandler");
 const { prototype } = require("./errors/unauthorized");
+const yaml = require("js-yaml");
+const fs = require("fs");
 app.get("/", (req, res) => {
-  res.send("ciao");
+  res.send(doc);
 });
 app.use(express.json());
 app.use("/api/v1/", authRoute);
@@ -18,6 +20,10 @@ app.use(errorHandler);
 
 const url = process.env.MONGO_URI;
 let port = process.env.PORT || 3000;
+
+const doc = yaml.load(fs.readFileSync("./swagger.yaml", "utf8"));
+console.log(doc);
+
 const start = async () => {
   try {
     await connectDB(url);

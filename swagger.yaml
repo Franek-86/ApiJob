@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  title: tt1
+  contact: {}
+  version: "1.0"
+jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
+servers:
+  - url: https://prova-69dh.onrender.com
+    variables: {}
+paths:
+  /api/v1/login:
+    post:
+      tags:
+        - User
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+                - examples:
+                    - name: Vas
+                      email: vas@gmail.com
+                      password: ciao
+              contentMediaType: application/json
+            example:
+              name: Vas
+              email: vas@gmail.com
+              password: ciao
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /api/v1/register:
+    post:
+      tags:
+        - User
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+                - examples:
+                    - name: Vas
+                      email: vas@gmail.com
+                      password: ciao
+              contentMediaType: application/json
+            example:
+              name: Vas
+              email: vas@gmail.com
+              password: ciao
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /api/v1/jobs:
+    post:
+      tags:
+        - Job
+      summary: createJob
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createJobRequest"
+                - examples:
+                    - company: House&Fun5
+                      position: housekeeper5
+              contentMediaType: application/json
+            example:
+              company: House&Fun5
+              position: housekeeper5
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Job
+      summary: getAllJobs
+      operationId: getAllJobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+  /api/v1/jobs/:
+    get:
+      tags:
+        - Job
+      summary: getJob
+      operationId: getJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Job
+      summary: deleteJob
+      operationId: deleteJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+components:
+  schemas:
+    loginrequest:
+      title: loginrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      examples:
+        - name: Vas
+          email: vas@gmail.com
+          password: ciao
+    registerrequest:
+      title: registerrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      examples:
+        - name: Vas
+          email: vas@gmail.com
+          password: ciao
+    createJobRequest:
+      title: createJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      examples:
+        - company: House&Fun5
+          position: housekeeper5
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Job
+    description: ""
