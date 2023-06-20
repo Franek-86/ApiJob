@@ -29,3 +29,4 @@ const start = async () => {
   }
 };
 start();
+// "start": "npx nodemon app.js"
