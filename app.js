@@ -8,13 +8,11 @@ const connectDB = require("./db/connectDB");
 const authMiddleware = require("./middleware/authMiddleware");
 const errorHandler = require("./middleware/errorHandler");
 const { prototype } = require("./errors/unauthorized");
-// const yaml = require("js-yaml");
-// const fs = require("fs");
-// const swaggerUi = require("swagger-ui-express");
-
-// const swaggerDocument = yaml.load(fs.readFileSync("./swagger.yaml", "utf8"));
-
-// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const yaml = require("js-yaml");
+const fs = require("fs");
+app.get("/", (req, res) => {
+  res.json(doc);
+});
 app.use(express.json());
 app.use("/api/v1/", authRoute);
 app.use("/api/v1/jobs", authMiddleware, jobsRoute);
