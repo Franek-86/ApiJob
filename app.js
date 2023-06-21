@@ -20,7 +20,7 @@ app.use(errorHandler);
 
 const url = process.env.MONGO_URI;
 let port = process.env.PORT || 3000;
-
+console.log(port);
 const doc = yaml.load(fs.readFileSync("./swagger.yaml", "utf8"));
 console.log(doc);
 
