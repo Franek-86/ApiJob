@@ -20,9 +20,6 @@ const loginUser = async (req, res, next) => {
     if (checkPassword) {
       const token = loggedUser.createJWT();
 
-      // next(token);
-      console.log(req.body);
-      // req.body = token;
       res.json({ name, token });
     } else {
       throw new Unauthorized("wrong authentication");
