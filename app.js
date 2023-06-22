@@ -12,13 +12,13 @@ const swaggerUi = require("swagger-ui-express");
 const cors = require("cors");
 const yaml = require("js-yaml");
 const fs = require("fs");
-const swaggerDocument = yaml.load(fs.readFileSync("./swagger.yaml", "utf8"));
-app.use(cors());
-app.use((req, res, next) => {
-  res.header({ "Access-Control-Allow-Origin": "*" });
-  next();
-});
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// const swaggerDocument = yaml.load(fs.readFileSync("./swagger.yaml", "utf8"));
+// app.use(cors());
+// app.use((req, res, next) => {
+//   res.header({ "Access-Control-Allow-Origin": "*" });
+//   next();
+// });
+// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 app.use("/api/v1/", authRoute);
 app.use("/api/v1/jobs", authMiddleware, jobsRoute);
