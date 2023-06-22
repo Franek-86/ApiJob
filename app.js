@@ -34,7 +34,7 @@ const start = async () => {
       console.log(`is listening on port ${port}`);
     });
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 };
 start();
