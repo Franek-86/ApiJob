@@ -5,7 +5,7 @@ info:
   version: "1.0"
 jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
 servers:
-  - url: https://prova-69dh.onrender.com
+  - url: https://prova-69dh.onrender.com/api/doc
     variables: {}
 paths:
   /api/v1/login:
