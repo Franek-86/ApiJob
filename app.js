@@ -23,9 +23,9 @@ app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/v1/", authRoute);
 app.use("/api/v1/jobs", authMiddleware, jobsRoute);
 app.use(errorHandler);
-app.use("/", (req, res) => {
-  res.send("ciao");
-});
+// app.use("/", (req, res) => {
+//   res.send("ciao");
+// });
 const url = process.env.MONGO_URI;
 let port = process.env.PORT || 3000;
 
