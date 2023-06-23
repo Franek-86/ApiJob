@@ -23,7 +23,9 @@ app.use("/api/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/v1/", authRoute);
 app.use("/api/v1/jobs", authMiddleware, jobsRoute);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/", "<h3>apiJobs</h3 <a href='/api-docs>here</a>");
+app.use("/", (req, res) => {
+  res.send("<h3>apiJobs</h3 <a href='/api-docs>here</a>");
+});
 app.use(errorHandler);
 
 const url = process.env.MONGO_URI;
