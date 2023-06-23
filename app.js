@@ -22,8 +22,9 @@ app.use(express.json());
 app.use("/api/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/v1/", authRoute);
 app.use("/api/v1/jobs", authMiddleware, jobsRoute);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/", "<h3>apiJobs</h3 <a href='/api-docs>here</a>");
 app.use(errorHandler);
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const url = process.env.MONGO_URI;
 let port = process.env.PORT || 3000;
