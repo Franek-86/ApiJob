@@ -1,14 +1,13 @@
 openapi: 3.0.0
 info:
-  title: tt1
+  title: ApiJob
   contact: {}
   version: "1.0"
-jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
 servers:
-  - url: https://prova-69dh.onrender.com
+  - url: https://prova-69dh.onrender.com/api/v1
     variables: {}
 paths:
-  /api/v1/login:
+  /login:
     post:
       tags:
         - User
@@ -22,11 +21,10 @@ paths:
             schema:
               allOf:
                 - $ref: "#/components/schemas/loginrequest"
-                - examples:
-                    - name: Vas
-                      email: vas@gmail.com
-                      password: ciao
-              contentMediaType: application/json
+                - example:
+                    name: Vas
+                    email: vas@gmail.com
+                    password: ciao
             example:
               name: Vas
               email: vas@gmail.com
@@ -38,8 +36,7 @@ paths:
           headers: {}
       deprecated: false
       security: []
-    parameters: []
-  /api/v1/register:
+  /register:
     post:
       tags:
         - User
@@ -53,14 +50,13 @@ paths:
             schema:
               allOf:
                 - $ref: "#/components/schemas/registerrequest"
-                - examples:
-                    - name: Vas
-                      email: vas@gmail.com
-                      password: ciao
-              contentMediaType: application/json
+                - example:
+                    name: Joe6
+                    email: joe6@gmail.com
+                    password: ciao
             example:
-              name: Vas
-              email: vas@gmail.com
+              name: Joe6
+              email: joe6@gmail.com
               password: ciao
         required: true
       responses:
@@ -69,8 +65,7 @@ paths:
           headers: {}
       deprecated: false
       security: []
-    parameters: []
-  /api/v1/jobs:
+  /jobs:
     post:
       tags:
         - Job
@@ -84,13 +79,12 @@ paths:
             schema:
               allOf:
                 - $ref: "#/components/schemas/createJobRequest"
-                - examples:
-                    - company: House&Fun5
-                      position: housekeeper5
-              contentMediaType: application/json
+                - example:
+                    company: unemployed
+                    position: none
             example:
-              company: House&Fun5
-              position: housekeeper5
+              company: unemployed
+              position: none
         required: true
       responses:
         "200":
@@ -112,8 +106,14 @@ paths:
       deprecated: false
       security:
         - bearer: []
-    parameters: []
-  /api/v1/jobs/:
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
     get:
       tags:
         - Job
@@ -140,7 +140,33 @@ paths:
       deprecated: false
       security:
         - bearer: []
-    parameters: []
+    patch:
+      tags:
+        - Job
+      summary: updateJob
+      operationId: updateJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updateJobRequest"
+                - example:
+                    company: lino.snc
+                    position: ceo
+            example:
+              company: lino.snc
+              position: ceo
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
 components:
   schemas:
     loginrequest:
@@ -157,10 +183,10 @@ components:
           type: string
         password:
           type: string
-      examples:
-        - name: Vas
-          email: vas@gmail.com
-          password: ciao
+      example:
+        name: Vas
+        email: vas@gmail.com
+        password: ciao
     registerrequest:
       title: registerrequest
       required:
@@ -175,10 +201,10 @@ components:
           type: string
         password:
           type: string
-      examples:
-        - name: Vas
-          email: vas@gmail.com
-          password: ciao
+      example:
+        name: Joe6
+        email: joe6@gmail.com
+        password: ciao
     createJobRequest:
       title: createJobRequest
       required:
@@ -190,14 +216,30 @@ components:
           type: string
         position:
           type: string
-      examples:
-        - company: House&Fun5
-          position: housekeeper5
+      example:
+        company: unemployed
+        position: none
+    updateJobRequest:
+      title: updateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: lino.snc
+        position: ceo
   securitySchemes:
     bearer:
       type: http
       scheme: bearer
 security: []
 tags:
+  - name: User
+    description: ""
   - name: Job
     description: ""
